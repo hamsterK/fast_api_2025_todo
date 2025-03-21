@@ -17,7 +17,7 @@ def get_db():
         db.close()
 
 
-db_dependancy = Annotated[Session, Depends(get_db)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 
 class TodoRequest(BaseModel):
@@ -28,12 +28,12 @@ class TodoRequest(BaseModel):
 
 
 @router.get("/")
-async def read_all(db: db_dependancy):
+async def read_all(db: db_dependency):
     return db.query(Todos).all()
 
 
 @router.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
-async def read_todo(db: db_dependancy, todo_id: int = Path(gt=0)):
+async def read_todo(db: db_dependency, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is not None:
         return todo_model
@@ -41,7 +41,7 @@ async def read_todo(db: db_dependancy, todo_id: int = Path(gt=0)):
 
 
 @router.post("/todo", status_code=status.HTTP_201_CREATED)
-async def create_todo(db: db_dependancy, todo_request: TodoRequest):
+async def create_todo(db: db_dependency, todo_request: TodoRequest):
     todo_model = Todos(**todo_request.dict())
 
     db.add(todo_model)
@@ -49,7 +49,7 @@ async def create_todo(db: db_dependancy, todo_request: TodoRequest):
 
 
 @router.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def update_todo(db: db_dependancy, todo_request: TodoRequest, todo_id: int = Path(gt=0)):
+async def update_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is None:
         raise HTTPException(status_code=404, detail='Todo not found')
@@ -64,7 +64,7 @@ async def update_todo(db: db_dependancy, todo_request: TodoRequest, todo_id: int
 
 
 @router.delete("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_todo(db: db_dependancy, todo_id: int = Path(gt=0)):
+async def delete_todo(db: db_dependency, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is None:
         raise HTTPException(status_code=404, detail='Todo not found')
