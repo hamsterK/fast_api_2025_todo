@@ -2,8 +2,8 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Path, APIRouter
 from sqlalchemy.orm import Session
 from starlette import status
-from models import Todos
-from database import SessionLocal
+from ..models import Todos
+from ..database import SessionLocal
 from .auth import get_current_user, raise_401_could_not_validate_user
 
 router = APIRouter(
