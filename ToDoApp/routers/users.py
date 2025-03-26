@@ -31,7 +31,7 @@ async def get_user(user: user_dependency, db: db_dependency):
     return db.query(Users).filter(Users.id == user.get('id')).first()
 
 
-@router.patch("/", status_code=status.HTTP_204_NO_CONTENT, description='Password successfully updated')
+@router.put("/password", status_code=status.HTTP_204_NO_CONTENT, description='Password successfully updated')
 async def change_password(user: user_dependency, db: db_dependency,
                           old_password: str = Body(min_length=1, max_length=30),
                           new_password: str = Body(min_length=5, max_length=30)):
@@ -44,3 +44,13 @@ async def change_password(user: user_dependency, db: db_dependency,
     else:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail='Wrong initial password')
 
+
+@router.put("/phone_number", status_code=status.HTTP_200_OK)
+async def update_phone_number(user: user_dependency, db: db_dependency,
+                              phone_number: str = Body(min_length=5, max_length=15)):
+    if user is None:
+        raise_401_could_not_validate_user()
+    user_model = db.query(Users).filter(Users.id == user.get('id')).first()
+    user_model.phone_number = phone_number
+    db.commit()
+    return {"message": "Phone number updated"}
