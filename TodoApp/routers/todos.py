@@ -45,7 +45,7 @@ async def read_todo(user: user_dependency,
     todo_model = db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).first()
     if todo_model is not None:
         return todo_model
-    raise HTTPException(status_code=404, detail='Todo not found')
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Todo not found')
 
 
 @router.post("/todo", status_code=status.HTTP_201_CREATED)
