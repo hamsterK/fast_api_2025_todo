@@ -5,6 +5,7 @@ from ..main import app
 from fastapi.testclient import TestClient
 import pytest
 from ..models import Todos
+from starlette import status
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///.testdb.db"
@@ -29,7 +30,7 @@ def override_get_db():
 
 
 def override_get_current_user():
-    return {'username': 'testuser', 'id': 1, 'user_role':  'admin'}
+    return {'username': 'testuser', 'id': 1, 'user_role': 'admin'}
 
 
 client = TestClient(app)

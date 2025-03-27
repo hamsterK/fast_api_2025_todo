@@ -7,7 +7,7 @@ from ..database import SessionLocal
 from .auth import get_current_user, raise_401_could_not_validate_user
 
 router = APIRouter(
-    prefix='/auth',
+    prefix='/admin',
     tags=['admin']
 )
 
