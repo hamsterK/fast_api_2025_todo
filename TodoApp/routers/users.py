@@ -45,7 +45,7 @@ async def change_password(user: user_dependency, db: db_dependency,
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail='Wrong initial password')
 
 
-@router.put("/phone_number", status_code=status.HTTP_204_NO_CONTENT, description="Phone number updated")
+@router.put("/phone_number", status_code=status.HTTP_204_NO_CONTENT, description="Phone number update")
 async def update_phone_number(user: user_dependency, db: db_dependency,
                               phone_number: str = Body(min_length=5, max_length=15)):
     if user is None:

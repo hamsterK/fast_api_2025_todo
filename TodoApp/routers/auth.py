@@ -10,6 +10,7 @@ from ..models import Users
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
+from ..db_secret import HASH_SECRET_KEY
 
 router = APIRouter(
     prefix='/auth',
@@ -17,7 +18,7 @@ router = APIRouter(
 )
 
 #  openssl rand -hex 32
-SECRET_KEY = '30492dd4ee9fef7503bc3e9763fd0fb13c30bd87b7b4f907d90d741c09daeb27'
+SECRET_KEY = HASH_SECRET_KEY
 ALGORITHM = 'HS256'
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
