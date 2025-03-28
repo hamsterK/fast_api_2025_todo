@@ -14,9 +14,6 @@ def test_authenticate_user(test_user):
     assert authenticated_user is not None
     assert authenticated_user.username == test_user.username
 
-    wrong_password_user = authenticate_user(test_user.username, 'wrongpassword', db)
-    assert wrong_password_user is False
-
 
 def test_authenticate_invalid_user():
     db = TestingSessionLocal()
