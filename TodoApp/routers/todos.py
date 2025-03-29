@@ -7,7 +7,10 @@ from ..models import Todos
 from ..database import SessionLocal
 from .auth import get_current_user, raise_401_could_not_validate_user
 
-router = APIRouter()
+router = APIRouter(
+    prefix='/todos',
+    tags=['todos']
+)
 
 
 def get_db():
