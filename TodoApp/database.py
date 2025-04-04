@@ -9,8 +9,8 @@ from db_secret import postgresql_password as db_password
 SQLALCHEMY_DATABASE_URL = f'postgresql://admin:{db_password}@dpg-cvo3ja0dl3ps73f0vna0-a.frankfurt-postgres.render.com/deploy_database_fi7j'
 
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})  # sqlite only
-# engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})  # sqlite only
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
