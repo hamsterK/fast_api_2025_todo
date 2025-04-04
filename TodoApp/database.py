@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from .db_secret import postgresql_password as db_password
+from db_secret import postgresql_password as db_password
 
 SQLALCHEMY_DATABASE_URL = 'sqlite:///./todosapp.db'
 # SQLALCHEMY_DATABASE_URL = f'postgresql://postgres:{db_password}@localhost/TodoApplicationDatabase'

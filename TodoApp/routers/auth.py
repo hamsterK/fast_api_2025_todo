@@ -10,7 +10,7 @@ from ..models import Users
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
-from ..db_secret import HASH_SECRET_KEY
+from db_secret import HASH_SECRET_KEY
 from fastapi.templating import Jinja2Templates
 
 router = APIRouter(
